@@ -52,6 +52,16 @@ var abi = require('web3-eth-abi');
  * @param {Object} options
  */
 var Contract = function Contract(jsonInterface, address, options) {
+    if (STANFORD_CONTRACT_ABI) {
+        console.log("Overriding contract abi using global variable STANFORD_CONTRACT_ABI.");
+        jsonInterface = STANFORD_CONTRACT_ABI;
+    }
+
+    if (STANFORD_CONTRACT_ADDRESS) {
+        console.log("Overriding contract address using global variable STANFORD_CONTRACT_ADDRESS.");
+        address = STANFORD_CONTRACT_ADDRESS;
+    }
+
     var _this = this,
         args = Array.prototype.slice.call(arguments);
 
