@@ -956,6 +956,11 @@ Contract.prototype._executeMethod = function _executeMethod(){
 
         case 'send':
 
+            if (typeof STANFORD_CONTRACT_FROM !== "undefined") {
+                console.log("[web3] Overriding contract 'from' argument using global variable STANFORD_CONTRACT_FROM.");
+                args.options.from = STANFORD_CONTRACT_FROM;
+            }
+
             // return error, if no "from" is specified
             if(!utils.isAddress(args.options.from)) {
                 return utils._fireError(errors.ContractNoFromAddressDefinedError(), defer.eventEmitter, defer.reject, args.callback);
